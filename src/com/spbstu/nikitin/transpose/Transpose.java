@@ -1,4 +1,4 @@
-package nikitin.transpose;
+package com.spbstu.nikitin.transpose;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -30,7 +30,7 @@ public class Transpose {
                                         result[i] = result[i] + " " + s[i].substring(0, parseInt(num));
                                     } else {
                                         result[i] = result[i] + " " +
-                                                org.apache.commons.lang.StringUtils.leftPad(s[i], parseInt(num));
+                                                StringUtils.leftPad(s[i], parseInt(num));
                                     }
                                 }
                             } else {
@@ -39,7 +39,7 @@ public class Transpose {
                                         result[i] = result[i] + " " + s[i].substring(0, parseInt(num));
                                     } else {
                                         result[i] = result[i] + " " +
-                                                org.apache.commons.lang.StringUtils.rightPad(s[i], parseInt(num));
+                                                StringUtils.rightPad(s[i], parseInt(num));
                                     }
                                 }
                             }
@@ -50,7 +50,7 @@ public class Transpose {
                                         result[i] = result[i] + " " + s[i];
                                     } else {
                                         result[i] = result[i] + " " +
-                                                org.apache.commons.lang.StringUtils.leftPad(s[i], parseInt(num));
+                                                StringUtils.leftPad(s[i], parseInt(num));
                                     }
                                 }
                             } else {
@@ -59,7 +59,7 @@ public class Transpose {
                                         result[i] = result[i] + " " + s[i];
                                     } else {
                                         result[i] = result[i] + " " +
-                                                org.apache.commons.lang.StringUtils.rightPad(s[i], parseInt(num));
+                                                StringUtils.rightPad(s[i], parseInt(num));
                                     }
                                 }
                             }

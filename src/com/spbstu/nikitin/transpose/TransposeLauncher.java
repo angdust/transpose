@@ -1,4 +1,4 @@
-package nikitin.transpose;
+package com.spbstu.nikitin.transpose;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
@@ -8,7 +8,7 @@ import org.kohsuke.args4j.Option;
 import java.io.IOException;
 
 public class TransposeLauncher {
-    @Option(name = "-a", required = true, metaVar = "Number", usage = "Number of symbols for writing")
+    @Option(name = "-a", metaVar = "Number", usage = "Number of symbols for writing")
     private String num;
 
     @Option(name = "-t", metaVar = "Cutter", usage = "Cut the length to num")
