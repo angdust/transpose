@@ -1,4 +1,4 @@
-package transpose;
+package nikitin.transpose;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
