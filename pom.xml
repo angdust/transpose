@@ -76,7 +76,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>transpose</mainClass>
+                            <mainClass>com.spbstu.nikitin.transpose.TransposeLauncher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

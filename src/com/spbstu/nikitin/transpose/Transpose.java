@@ -9,15 +9,19 @@ import static java.lang.Integer.parseInt;
 public class Transpose {
     public static String[] transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName)
             throws IOException {
-        String[] result = new String[0];
+        int quantity = Transpose.longest(inputFileName);
+        if (quantity == -1) {
+            throw new IOException("InputFile is empty");
+        }
+        String[] result = new String[quantity];
         String[] s;
         File input = new File(inputFileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
             try (FileWriter writer = new FileWriter(outputFileName, true)) {
+                String st;
 
-
-                while (reader.readLine() != null) {
-                    s = reader.readLine().split(" ");
+                while ((st = reader.readLine()) != null) {
+                    s = st.split(" ");
                     if (num == null) {
                         for (int i = 0; i < s.length; i++) {
                             result[i] = result[i] + " " + s[i];
@@ -66,8 +70,11 @@ public class Transpose {
                         }
                     }
                 }
-                for (int i = 0; i < result.length; i++) {
-                    writer.write(result[i]);
+                for (String aResult : result) {
+                    if (aResult != null) {
+                        writer.write(aResult);
+                    }
+                    writer.write("\n");
                 }
             }
         }
@@ -75,5 +82,23 @@ public class Transpose {
         return result;
     }
 
-
+    private static int longest(String inputFileName)
+            throws IOException {
+        File input = new File(inputFileName);
+        int max = -1;
+        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+            String st;
+            while ((st = reader.readLine()) != null) {
+                int s = st.split(" ").length;
+                if (s > max) {
+                    max = s;
+                }
+            }
+            reader.close();
+        }
+        return max;
+    }
 }
+
+
+
