@@ -22,54 +22,104 @@ public class Transpose {
 
                 while ((st = reader.readLine()) != null) {
                     s = st.split(" ");
+                    String x;
+                    int number = 0;
                     if (num == null) {
-                        for (int i = 0; i < s.length; i++) {
-                            result[i] = result[i] + " " + s[i];
-                        }
+                        x = "0";
                     } else {
-                        if (t) {
-                            if (r) {
-                                for (int i = 0; i < s.length; i++) {
-                                    if (s[i].length() > parseInt(num)) {
-                                        result[i] = result[i] + " " + s[i].substring(0, parseInt(num));
-                                    } else {
-                                        result[i] = result[i] + " " +
-                                                StringUtils.leftPad(s[i], parseInt(num));
-                                    }
-                                }
-                            } else {
-                                for (int i = 0; i < s.length; i++) {
-                                    if (s[i].length() > parseInt(num)) {
-                                        result[i] = result[i] + " " + s[i].substring(0, parseInt(num));
-                                    } else {
-                                        result[i] = result[i] + " " +
-                                                StringUtils.rightPad(s[i], parseInt(num));
-                                    }
+                        x = "1";
+                        number = parseInt(num);
+                    }
+                    if (t) {
+                        x += "1";
+                    } else {
+                        x += "0";
+                    }
+                    if (r) {
+                        x += "1";
+                    } else {
+                        x += "0";
+                    }
+
+                    switch (x) {
+                        case "000":
+                            for (int i = 0; i < s.length; i++) {
+                                result[i] = usualAdd(result[i], s[i]);
+                            }
+                            break;
+
+                        case "001":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > 10) {
+                                    result[i] = usualAdd(result[i], s[i]);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], 10, r);
                                 }
                             }
-                        } else {
-                            if (r) {
-                                for (int i = 0; i < s.length; i++) {
-                                    if (s[i].length() > parseInt(num)) {
-                                        result[i] = result[i] + " " + s[i];
-                                    } else {
-                                        result[i] = result[i] + " " +
-                                                StringUtils.leftPad(s[i], parseInt(num));
-                                    }
-                                }
-                            } else {
-                                for (int i = 0; i < s.length; i++) {
-                                    if (s[i].length() > parseInt(num)) {
-                                        result[i] = result[i] + " " + s[i];
-                                    } else {
-                                        result[i] = result[i] + " " +
-                                                StringUtils.rightPad(s[i], parseInt(num));
-                                    }
+                            break;
+
+                        case "010":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = addForShort(result[i], s[i], 10);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], 10, r);
                                 }
                             }
-                        }
+                            break;
+
+                        case "011":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = addForShort(result[i], s[i], 10);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], 10, r);
+                                }
+                            }
+                            break;
+
+                        case "100":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = usualAdd(result[i], s[i]);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], number, r);
+                                }
+                            }
+                            break;
+
+                        case "101":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = usualAdd(result[i], s[i]);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], number, r);
+                                }
+                            }
+                            break;
+
+                        case "110":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = addForShort(result[i], s[i], number);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], number, r);
+                                }
+                            }
+                            break;
+
+                        case "111":
+                            for (int i = 0; i < s.length; i++) {
+                                if (s[i].length() > number) {
+                                    result[i] = addForShort(result[i], s[i], number);
+                                } else {
+                                    result[i] = addForLong(result[i], s[i], number, r);
+                                }
+                            }
+                            break;
                     }
                 }
+
                 for (String aResult : result) {
                     if (aResult != null) {
                         writer.write(aResult);
@@ -97,6 +147,38 @@ public class Transpose {
             reader.close();
         }
         return max;
+    }
+
+    private static String usualAdd(String res, String val) {
+        if (res != null) {
+            return res + " " + val;
+        } else {
+            return val;
+        }
+    }
+
+    private static String addForShort(String res, String val, int num) {
+        if (res != null) {
+            return res + " " + val.substring(0, num);
+        } else {
+            return val.substring(0, num);
+        }
+    }
+
+    private static String addForLong(String res, String val, int num, boolean r) {
+        if (r) {
+            if (res != null) {
+                return res + " " + StringUtils.leftPad(val, num);
+            } else {
+                return StringUtils.leftPad(val, num);
+            }
+        } else {
+            if (res != null) {
+                return res + " " + StringUtils.rightPad(val, num);
+            } else {
+                return StringUtils.rightPad(val, num);
+            }
+        }
     }
 }
 
