@@ -18,8 +18,39 @@ public class Transpose {
         int number = num != null ? parseInt(num) : 10;
         String[] result = new String[quantity];
         File input = new File(inputFileName);
-        try (BufferedReader reader = new BufferedReader(new FileReader(input));
-             FileWriter writer = new FileWriter(outputFileName, true)) {
+        try (FileWriter writer = new FileWriter(outputFileName, true)) {
+
+            result = logic(result, num, inputFileName, number, t, r);
+
+
+            for (String aResult : result)
+                writer.write((aResult != null ? aResult : "") + "\n");
+        }
+
+        return result;
+    }
+
+    public static int longest(String inputFileName)
+            throws IOException {
+        File input = new File(inputFileName);
+        int max = -1;
+        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+            String st;
+            while ((st = reader.readLine()) != null) {
+                int s = st.split(" ").length;
+                if (s > max) {
+                    max = s;
+                }
+            }
+            reader.close();
+        }
+        return max;
+    }
+
+    public static String[] logic(String[] result, String num, String inputFileName, int number, boolean t, boolean r)
+            throws IOException {
+        File input = new File(inputFileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
             String st;
             while ((st = reader.readLine()) != null) {
                 String[] s = st.split(" ");
@@ -48,31 +79,10 @@ public class Transpose {
                     }
                 }
             }
-
-            for (String aResult : result)
-                writer.write((aResult != null ? aResult : "") + "\n");
+            return result;
         }
 
-        return result;
     }
-
-    private static int longest(String inputFileName)
-            throws IOException {
-        File input = new File(inputFileName);
-        int max = -1;
-        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
-            String st;
-            while ((st = reader.readLine()) != null) {
-                int s = st.split(" ").length;
-                if (s > max) {
-                    max = s;
-                }
-            }
-            reader.close();
-        }
-        return max;
-    }
-
 }
 
 
