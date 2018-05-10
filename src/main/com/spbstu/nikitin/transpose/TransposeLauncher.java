@@ -1,4 +1,4 @@
-package com.spbstu.nikitin.transpose;
+package main.com.spbstu.nikitin.transpose;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
@@ -40,7 +40,8 @@ public class TransposeLauncher {
         }
 
         try {
-            String[] result = Transpose.transpose(num, t, r, outputFileName, inputFileName);
+            Transpose object = new Transpose();
+            String[] result = object.transpose(num, t, r, outputFileName, inputFileName);
             //
 
         } catch (IOException e) {
