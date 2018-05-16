@@ -1,4 +1,4 @@
-package main.com.spbstu.nikitin.transpose;
+package main.java;
 
 import org.apache.commons.lang.StringUtils;
 

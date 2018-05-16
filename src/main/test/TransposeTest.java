@@ -1,6 +1,6 @@
-package test.com.spbstu.nikitin.test;
+package main.test;
 
-import main.com.spbstu.nikitin.transpose.Transpose;
+import main.java.Transpose;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class TransposeTest {
         int test = 0;
         try {
             Transpose object = new Transpose();
-            test = object.findTheLongest("src/test/com/spbstu/nikitin/test/input/input1");
+            test = object.findTheLongest("src/main/test/resources/input1");
         } catch (IOException e) {
             assertEquals(3, test);
         }
@@ -30,7 +30,7 @@ public class TransposeTest {
         result1[2] = "e";
         try {
             Transpose object = new Transpose();
-            test1 = object.doTranspose(null, "src/test/com/spbstu/nikitin/test/input/input1", false, false);
+            test1 = object.doTranspose(null, "src/main/test/resources/input1", false, false);
         } catch (IOException e) {
             assertArrayEquals(test1, result1);
         }
@@ -42,7 +42,7 @@ public class TransposeTest {
         result2[2] = "e ";
         try {
             Transpose object = new Transpose();
-            test2 = object.doTranspose("2", "src/test/com/spbstu/nikitin/test/input/input1", false, false);
+            test2 = object.doTranspose("2", "src/main/test/resources/input1", false, false);
         } catch (IOException e) {
             assertArrayEquals(test2, result2);
         }
@@ -54,7 +54,7 @@ public class TransposeTest {
         result3[2] = " e";
         try {
             Transpose object = new Transpose();
-            test3 = object.doTranspose("2", "src/test/com/spbstu/nikitin/test/input/input1", false, true);
+            test3 = object.doTranspose("2", "src/main/test/resources/input1", false, true);
         } catch (IOException e) {
             assertArrayEquals(test3, result3);
         }
@@ -65,7 +65,7 @@ public class TransposeTest {
         result4[1] = "jus for";
         try {
             Transpose object = new Transpose();
-            test4 = object.doTranspose("3", "src/test/com/spbstu/nikitin/test/input/input1", true, false);
+            test4 = object.doTranspose("3", "src/main/test/resources/input2", true, false);
         } catch (IOException e) {
             assertArrayEquals(test4, result4);
         }
@@ -76,7 +76,7 @@ public class TransposeTest {
         result5[1] = "j f";
         try {
             Transpose object = new Transpose();
-            test5 = object.doTranspose("1", "src/test/com/spbstu/nikitin/test/input/input1", true, true);
+            test5 = object.doTranspose("1", "src/main/test/resources/input2", true, true);
         } catch (IOException e) {
             assertArrayEquals(test5, result5);
         }

@@ -59,7 +59,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>src/test</testSourceDirectory>
+        <testSourceDirectory>src/main/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -86,7 +86,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>main.com.spbstu.nikitin.transpose.TransposeLauncher</mainClass>
+                            <mainClass>main.java.TransposeLauncher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
