@@ -40,7 +40,7 @@ public class TransposeLauncher {
         }
 
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose(num, t, r, outputFileName, inputFileName);
             String[] result = object.transpose(num, t, r, outputFileName, inputFileName);
             //
 

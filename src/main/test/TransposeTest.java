@@ -29,7 +29,7 @@ public class TransposeTest {
         result1[1] = "b d";
         result1[2] = "e";
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose(null, false, false, null, "src/main/test/resources/input1");
             test1 = object.doTranspose(null, "src/main/test/resources/input1", false, false);
         } catch (IOException e) {
             assertArrayEquals(test1, result1);
@@ -41,7 +41,7 @@ public class TransposeTest {
         result2[1] = "b  d ";
         result2[2] = "e ";
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose("2", false, false, null, "src/main/test/resources/input1");
             test2 = object.doTranspose("2", "src/main/test/resources/input1", false, false);
         } catch (IOException e) {
             assertArrayEquals(test2, result2);
@@ -53,7 +53,7 @@ public class TransposeTest {
         result3[1] = " b  d";
         result3[2] = " e";
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose("2", false, true, null, "src/main/test/resources/input1");
             test3 = object.doTranspose("2", "src/main/test/resources/input1", false, true);
         } catch (IOException e) {
             assertArrayEquals(test3, result3);
@@ -64,7 +64,7 @@ public class TransposeTest {
         result4[0] = "it' onl tes";
         result4[1] = "jus for";
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose("3", true, false, null, "src/main/test/resources/input2");
             test4 = object.doTranspose("3", "src/main/test/resources/input2", true, false);
         } catch (IOException e) {
             assertArrayEquals(test4, result4);
@@ -75,7 +75,7 @@ public class TransposeTest {
         result5[0] = "i o t";
         result5[1] = "j f";
         try {
-            Transpose object = new Transpose();
+            Transpose object = new Transpose("1", true, true, null, "src/main/test/resources/input2");
             test5 = object.doTranspose("1", "src/main/test/resources/input2", true, true);
         } catch (IOException e) {
             assertArrayEquals(test5, result5);

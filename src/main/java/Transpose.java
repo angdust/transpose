@@ -7,24 +7,17 @@ import java.io.*;
 import static java.lang.Integer.parseInt;
 
 public class Transpose {
-    public String[] transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName)
-            throws IOException {
-        Transpose object = new Transpose();
-        int quantity = object.findTheLongest(inputFileName);
-        if (quantity == -1)
-            throw new IOException("Invalid input name");
-        String[] result;
-        result = doTranspose(num, inputFileName, t, r);
-        if (outputFileName != null) {
-            try (FileWriter writer = new FileWriter(outputFileName, true)) {
-                for (String aResult : result)
-                    writer.write((aResult != null ? aResult : "") + "\n");
-            }
-        } else {
-            for (String bResult : result)
-                System.out.println(bResult != null ? bResult : "");
-        }
-        return result;
+    private String[] result;
+
+    public Transpose() {
+
+    }
+
+    public Transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName) throws IOException {
+
+        int quantity = findTheLongest(inputFileName);
+        this.result = new String[quantity];
+
     }
 
     public int findTheLongest(String inputFileName)
@@ -44,11 +37,23 @@ public class Transpose {
         return max;
     }
 
+    public String[] transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName)
+            throws IOException {
+        result = doTranspose(num, inputFileName, t, r);
+        if (outputFileName != null) {
+            try (FileWriter writer = new FileWriter(outputFileName, true)) {
+                for (String aResult : result)
+                    writer.write((aResult != null ? aResult : "") + "\n");
+            }
+        } else {
+            for (String bResult : result)
+                System.out.println(bResult != null ? bResult : "");
+        }
+        return result;
+    }
+
     public String[] doTranspose(String num, String inputFileName, boolean t, boolean r)
             throws IOException {
-        Transpose object = new Transpose();
-        int quantity = object.findTheLongest(inputFileName);
-        String[] result = new String[quantity];
         File input = new File(inputFileName);
         int number = num != null ? parseInt(num) : 10;
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
@@ -59,9 +64,9 @@ public class Transpose {
                     boolean l = s[i].length() > number;
                     if (result[i] != null) {
                         result[i] += " ";
-                        result[i] += object.makeTheString(t, r, l, num, s[i], number);
+                        result[i] += makeTheString(t, r, l, num, s[i], number);
                     } else {
-                        result[i] = object.makeTheString(t, r, l, num, s[i], number);
+                        result[i] = makeTheString(t, r, l, num, s[i], number);
                     }
                 }
             }
