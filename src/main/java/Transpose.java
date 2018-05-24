@@ -1,5 +1,3 @@
-package main.java;
-
 import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
@@ -24,17 +22,21 @@ public class Transpose {
             throws IOException {
         File input = new File(inputFileName);
         int max = -1;
-        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
-            String st;
-            while ((st = reader.readLine()) != null) {
-                int s = st.split(" ").length;
-                if (s > max) {
-                    max = s;
+        if (input.length() != 0) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+                String st;
+                while ((st = reader.readLine()) != null) {
+                    int s = st.split(" ").length;
+                    if (s > max) {
+                        max = s;
+                    }
                 }
+                reader.close();
             }
-            reader.close();
+            return max;
+        } else {
+            return 1;
         }
-        return max;
     }
 
     public String[] transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName)
