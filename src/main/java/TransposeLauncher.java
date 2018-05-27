@@ -38,8 +38,8 @@ public class TransposeLauncher {
         }
 
         try {
-            Transpose object = new Transpose(inputFileName);
-            String[] result = object.writeTheResult(num, t, r, outputFileName, inputFileName);
+            Transpose object = new Transpose(num, t, r, outputFileName, inputFileName);
+            String[] result = object.writeTheResult();
             //
 
         } catch (IOException e) {

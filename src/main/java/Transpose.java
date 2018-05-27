@@ -4,19 +4,32 @@ import java.io.*;
 
 import static java.lang.Integer.parseInt;
 
-public class Transpose {
+public class Transpose extends MatrixForTranspose {
     private String[] result;
+    private int length;
+    private boolean t;
+    private boolean r;
+    private String num;
+    private String outputFileName;
+    private String inputFileName;
 
-    public Transpose() {}
-
-    public Transpose(String inputFileName) throws IOException {
-
-        int quantity = findTheLongest(inputFileName);
-        this.result = new String[quantity];
+    public Transpose() {
     }
 
-    public int findTheLongest(String inputFileName)
-            throws IOException {
+    public Transpose(String num0, boolean t0, boolean r0, String outputFileName0, String inputFileName0) throws IOException {
+
+        inputFileName = inputFileName0;
+        length = findTheLongest();
+        result = new String[length];
+        t = t0;
+        r = r0;
+        num = num0;
+        outputFileName = outputFileName0;
+
+    }
+
+    @Override
+    public int findTheLongest() throws IOException {
         File input = new File(inputFileName);
         int max = -1;
         if (input.length() != 0) {
@@ -36,9 +49,10 @@ public class Transpose {
         }
     }
 
-    public String[] writeTheResult(String num, boolean t, boolean r, String outputFileName, String inputFileName)
+    @Override
+    public String[] writeTheResult()
             throws IOException {
-        result = doTranspose(num, inputFileName, t, r);
+        result = doTranspose();
         if (outputFileName != null) {
             try (FileWriter writer = new FileWriter(outputFileName, true)) {
                 for (String aResult : result)
@@ -51,7 +65,8 @@ public class Transpose {
         return result;
     }
 
-    public String[] doTranspose(String num, String inputFileName, boolean t, boolean r)
+    @Override
+    public String[] doTranspose()
             throws IOException {
         File input = new File(inputFileName);
         int number = num != null ? parseInt(num) : 10;
@@ -63,9 +78,9 @@ public class Transpose {
                     boolean l = s[i].length() > number;
                     if (result[i] != null) {
                         result[i] += " ";
-                        result[i] += makeTheString(t, r, l, num, s[i], number);
+                        result[i] += makeTheString(l, num, s[i], number);
                     } else {
-                        result[i] = makeTheString(t, r, l, num, s[i], number);
+                        result[i] = makeTheString(l, num, s[i], number);
                     }
                 }
             }
@@ -73,7 +88,7 @@ public class Transpose {
         }
     }
 
-    private String makeTheString(boolean t, boolean r, boolean l, String num, String word, int number) {
+    private String makeTheString(boolean l, String num, String word, int number) {
         if (!t && l || !t && !r && (num == null))
             return word;
         else if (!r && !l)
@@ -83,6 +98,8 @@ public class Transpose {
         else
             return word.substring(0, number);
     }
+
+
 }
 
 
