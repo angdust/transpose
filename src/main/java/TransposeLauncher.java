@@ -39,9 +39,6 @@ public class TransposeLauncher {
 
         try {
             Transpose object = new Transpose(num, t, r, outputFileName, inputFileName);
-            String[] result = object.transpose(num, t, r, outputFileName, inputFileName);
-            //
-
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

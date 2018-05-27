@@ -5,17 +5,14 @@ import java.io.*;
 import static java.lang.Integer.parseInt;
 
 public class Transpose {
-    private String[] result;
-
-    public Transpose() {
-
-    }
+    public static int length;
+    public static String[] result;
 
     public Transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName) throws IOException {
-
-        int quantity = findTheLongest(inputFileName);
-        this.result = new String[quantity];
-
+        length = findTheLongest(inputFileName);
+        result = new String[length];
+        result = doTranspose(num, inputFileName, t, r);
+        result = writeTheResult(outputFileName);
     }
 
     public int findTheLongest(String inputFileName)
@@ -39,9 +36,8 @@ public class Transpose {
         }
     }
 
-    public String[] transpose(String num, boolean t, boolean r, String outputFileName, String inputFileName)
+    public String[] writeTheResult(String outputFileName)
             throws IOException {
-        result = doTranspose(num, inputFileName, t, r);
         if (outputFileName != null) {
             try (FileWriter writer = new FileWriter(outputFileName, true)) {
                 for (String aResult : result)
