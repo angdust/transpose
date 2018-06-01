@@ -1,10 +1,6 @@
-import org.apache.commons.lang.StringUtils;
-
 import java.io.*;
 
-import static java.lang.Integer.parseInt;
-
-public class Transpose extends MatrixForTranspose {
+public class Transpose {
     private String[] result;
     private int length;
     private boolean t;
@@ -28,7 +24,6 @@ public class Transpose extends MatrixForTranspose {
 
     }
 
-    @Override
     public int findTheLongest() throws IOException {
         File input = new File(inputFileName);
         int max = -1;
@@ -49,7 +44,6 @@ public class Transpose extends MatrixForTranspose {
         }
     }
 
-    @Override
     public String[] writeTheResult()
             throws IOException {
         result = doTranspose();
@@ -65,40 +59,26 @@ public class Transpose extends MatrixForTranspose {
         return result;
     }
 
-    @Override
     public String[] doTranspose()
             throws IOException {
         File input = new File(inputFileName);
-        int number = num != null ? parseInt(num) : 10;
         try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
             String st;
             while ((st = reader.readLine()) != null) {
                 String[] s = st.split(" ");
                 for (int i = 0; i < s.length; i++) {
-                    boolean l = s[i].length() > number;
+                    Processor object = new Processor(t, r, num, s[i].length(), s[i]);
                     if (result[i] != null) {
                         result[i] += " ";
-                        result[i] += makeTheString(l, num, s[i], number);
+                        result[i] += object.doTheCorrectWord();
                     } else {
-                        result[i] = makeTheString(l, num, s[i], number);
+                        result[i] = object.doTheCorrectWord();
                     }
                 }
             }
             return result;
         }
     }
-
-    private String makeTheString(boolean l, String num, String word, int number) {
-        if (!t && l || !t && !r && (num == null))
-            return word;
-        else if (!r && !l)
-            return StringUtils.rightPad(word, number);
-        else if (r && !l)
-            return StringUtils.leftPad(word, number);
-        else
-            return word.substring(0, number);
-    }
-
 
 }
 
